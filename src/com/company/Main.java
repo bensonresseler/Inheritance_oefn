@@ -3,47 +3,65 @@ package com.company;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList<Persoon2> personen = new ArrayList<>();
-        personen.add(new Persoon2("Karen", "Damen", LocalDate.of(1974, 10, 28)));
-        personen.add(new Persoon2("Kristel", "Verbeke", LocalDate.of(1975, 12, 10)));
-        personen.add(new Persoon2("Kathleen", "Aerts", LocalDate.of(1978, 6, 18)));
-        for(Persoon2 p: personen){
-            System.out.println(p);
+        ArrayList<String> zangeressen = new ArrayList<>();
+
+        zangeressen.add("Karen");
+        zangeressen.add("Kristel");
+        zangeressen.add("Kathleen");
+
+        String tezoeken = "Kathleen";
+        if (zangeressen.contains(tezoeken)){
+            System.out.printf("%s staat in de eerste lijst.%n", tezoeken);
+        }else{
+            System.out.printf("%s staat niet in de eerste lijst.%n", tezoeken);
+        }
+
+        ArrayList<Zangeres> zangeressen2 = new ArrayList<>();
+
+        zangeressen2.add(new Zangeres("Karen"));
+        zangeressen2.add(new Zangeres("Kristel"));
+        zangeressen2.add(new Zangeres("Kathleen"));
+
+        Zangeres tezoeken2 = new Zangeres("Kathleen");
+        if (zangeressen2.contains(tezoeken2)){
+            System.out.printf("%s staat in de tweede lijst.%n", tezoeken2);
+        }else{
+            System.out.printf("%s staat niet in de tweede lijst.%n", tezoeken2);
         }
     }
 }
-
-class Persoon2 {
+class Zangeres{
     private String voornaam;
-    private String achternaam;
-    private LocalDate geboortedatum;
 
-    public Persoon2(String voornaam, String achternaam, LocalDate geboortedatum) {
+    public Zangeres(String voornaam) {
         this.voornaam = voornaam;
-        this.achternaam = achternaam;
-        this.geboortedatum = geboortedatum;
     }
 
     public String getVoornaam() {
         return voornaam;
     }
 
-    public String getAchternaam() {
-        return achternaam;
-    }
-
-    public int  getLeeftijd() {
-        LocalDate vandaag = LocalDate.now();
-        Period periode = Period.between(geboortedatum,vandaag);
-        return periode.getYears();
+    @Override
+    public String toString() {
+        return voornaam;
     }
 
     @Override
-    public String toString() {
-        return String.format("%s %s is %d jaar oud.", voornaam, achternaam, getLeeftijd());
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Zangeres zangeres = (Zangeres) o;
+        return Objects.equals(voornaam, zangeres.voornaam);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(voornaam);
     }
 }
