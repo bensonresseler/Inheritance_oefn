@@ -4,16 +4,15 @@ public class Main {
 
     public static void main(String[] args) {
             BankRekening rekening = new BankRekening();
-            Klant karen = new Klant(rekening);
-            karen.setVoornaam("Karen");
-            karen.setAchternaam("Damen");
+            Klant karen = new Klant("Karen", "Damen",rekening);
         }
     }
 
     class Klant extends BasisPersoon {
         private BankRekening rekening;
 
-        public Klant(BankRekening rekening) {
+        public Klant(String voornaam, String achternaam, BankRekening rekening) {
+            super(voornaam, achternaam);
             this.rekening = rekening;
         }
     }
@@ -33,6 +32,11 @@ public class Main {
     class BasisPersoon{
         private String voornaam;
         private String achternaam;
+
+        public BasisPersoon(String voornaam, String achternaam) {
+            this.voornaam = voornaam;
+            this.achternaam = achternaam;
+        }
 
         public String getVoornaam() {
             return voornaam;
