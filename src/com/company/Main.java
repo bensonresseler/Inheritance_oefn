@@ -3,51 +3,40 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-            BankRekening rekening = new BankRekening();
-            Klant karen = new Klant("Karen", "Damen",rekening);
-        }
+        Zangeres karen = new Zangeres("Karen", "Damen");
+        System.out.println(karen);
+    }
+}
+class Zangeres extends BasisPersoon{
+    public Zangeres(String voornaam, String achternaam) {
+        super(voornaam, achternaam);
     }
 
-    class Klant extends BasisPersoon {
-        private BankRekening rekening;
+    @Override
+    public String toString() {
+        return String.format("Deze zangeres heet %s %s", getVoornaam(), getAchternaam());
+    }
+}
 
-        public Klant(String voornaam, String achternaam, BankRekening rekening) {
-            super(voornaam, achternaam);
-            this.rekening = rekening;
-        }
+class BasisPersoon{
+    private String voornaam;
+    private String achternaam;
+
+    public BasisPersoon(String voornaam, String achternaam) {
+        this.voornaam = voornaam;
+        this.achternaam = achternaam;
     }
 
-    class BankRekening{
-        private int saldo;
-        public int getSaldo(){
-            return saldo;
-        }
-        public void storten(int bedrag){
-            saldo += bedrag;
-        }
-        public void afhalen(int bedrag){
-            saldo -= bedrag;
-        }
+    public String getVoornaam() {
+        return voornaam;
     }
-    class BasisPersoon{
-        private String voornaam;
-        private String achternaam;
 
-        public BasisPersoon(String voornaam, String achternaam) {
-            this.voornaam = voornaam;
-            this.achternaam = achternaam;
-        }
-
-        public String getVoornaam() {
-            return voornaam;
-        }
-        public void setVoornaam(String voornaam) {
-            this.voornaam = voornaam;
-        }
-        public String getAchternaam() {
-            return achternaam;
-        }
-        public void setAchternaam(String achternaam) {
-            this.achternaam = achternaam;
-        }
+    public String getAchternaam() {
+        return achternaam;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Deze persoon heet %s %s", voornaam, achternaam);
+    }
+}
